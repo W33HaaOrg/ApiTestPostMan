@@ -1,0 +1,79 @@
+{
+	"info": {
+		"_postman_id": "c576a3c1-fab6-4027-9498-08fe85b2dc9a",
+		"name": "W33Automate - Data driven",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Functional Testing - Standard",
+			"item": [
+				{
+					"name": "MockApi",
+					"item": [
+						{
+							"name": "GetUserById",
+							"item": [
+								{
+									"name": "GetUserByIdSuccessfully",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "1fed2e3c-38fe-436e-bd55-79da32a46121",
+												"exec": [
+													"var Status = parseInt(pm.variables.get(\"Status\"));\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(Status);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Verify response body\", function () {\r",
+													"    var jsonData = pm.response.json();\r",
+													"    pm.expect(jsonData.id).to.eql(data.UserId + \"\");\r",
+													"});\r",
+													""
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"id": "0bf51feb-f2ff-4c14-8665-4c24951a523d",
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{BaseUrl}}/users/{{UserId}}",
+											"host": [
+												"{{BaseUrl}}"
+											],
+											"path": [
+												"users",
+												"{{UserId}}"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

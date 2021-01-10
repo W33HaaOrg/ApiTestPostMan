@@ -1,0 +1,14 @@
+{
+	"id": "8cf442e3-1721-49c6-9c9c-b4dd9a47b37c",
+	"name": "W33AutomateEnv",
+	"values": [
+		{
+			"key": "BaseUrl",
+			"value": "https://5f9cbdef6dc8300016d3139b.mockapi.io/w33/",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2020-11-23T03:52:11.531Z",
+	"_postman_exported_using": "Postman/7.36.0"
+}
