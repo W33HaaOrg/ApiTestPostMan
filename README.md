@@ -90,11 +90,11 @@ The standard is just create by myself after some research of other automation te
   - The folders below the Collection is test suits
   - The folders below the test suits is test cases
   - Finally, the requests inside the test cases folders is the place that we will implement the automation script for the test cases.
-- Each test case shold verify the **Status code** and the **response body** to make sure it retrive the right data.
+- Each test case should verify the **Status code** and the **response body** to make sure it retrieve the right data.
 - Every variable must be declare by script instead of creating manually except Environment  and Global variable to make sure the test cases not base on each other in term of variable aspect.
 - When we want to call API to setup or tear down the script, we should call it by script in Pre-request Script and Tests.
 
-We start to automate the manual test case base on previous step following this standard (Continue automate after done the **first step**). Firstly, we will create an Environment variable is **BaseUrl** to stored its site base URL.Then we use it in the Url of the request. The BaseUrl can be change when the environment is changed. For example, we change the application's enviroment from SIT to UAT, so we just adjust the BaseUrl to make it run correctly. Secondly, The valid UserId = 50 is myth, We should make the absolutely value UserId by call the Create User API. We just put this source code into Pre-request Script to create new User and put the UserId to collection Variable
+We start to automate the manual test case base on previous step following this standard (Continue automate after done the **first step**). Firstly, we will create an Environment variable is **BaseUrl** to stored its site base URL.Then we use it in the Url of the request. The BaseUrl can be change when the environment is changed. For example, we change the application's environment from SIT to UAT, so we just adjust the BaseUrl to make it run correctly. Secondly, The valid UserId = 50 is myth, We should make the absolutely value UserId by call the Create User API. We just put this source code into Pre-request Script to create new User and put the UserId to collection Variable
 
 ```js
 var baseUrl = pm.environment.get("BaseUrl");
@@ -167,7 +167,7 @@ pm.sendRequest(deleteRequest, (error, response) => {
 
 ## How to automate the manual script following data driven type
 
-To automate the manual script following data drivent type, we are going to adjust the manual test script. Firstly, we add the BaseUrl environment variable like the previous section (or just use its environment variable). Secondly, we add the verify script into **Tests**
+To automate the manual script following data driven type, we are going to adjust the manual test script. Firstly, we add the BaseUrl environment variable like the previous section (or just use its environment variable). Secondly, we add the verify script into **Tests**
 
 ```js
 var Status = parseInt(pm.variables.get("Status"));
@@ -195,7 +195,7 @@ To run the test script, we click on **Runner** ,and when the Collection Runner i
 
 ## Run collection and get report by newman
 
-Automated reporting is one of the most important parts when we do the automation testing. With Postman, there are an tool base on Node.js that support our to automatedly generate a report after the test done the execution. That is **newman-reporter-htmlextra**!
+Automated reporting is one of the most important parts when we do the automation testing. With Postman, there are an tool base on Node.js that support our to automatically generate a report after the test done the execution. That is **newman-reporter-htmlextra**!
 To use the newman-reporter-htmlextra we should follow these steps:
 
 - Download and install [Node.js](https://nodejs.org/en/download/)
@@ -206,10 +206,14 @@ To run and generate HTML report by newman-reporter-htmlextra, we run this comman
 
 Reference: <https://www.npmjs.com/package/newman-reporter-htmlextra>
 
-## CIDI with jenkins
+## CIDI with Jenkins
 
-We assume that Jenkins is already setup on our machine and the Node.js and Newman is installed in that machine. We will go throw to know how to run automation test script with Postman on the Jenkins. Firstly, we create new **Freestyle project** with name **W33_Postman_Api_Automation_Test**. Then, we chose Source Code Management with Git by inputing Repository URL and Credentials. After setup source code repository we add **Execute Windows batch command** in **Build** and add this command to run the scripts **newman run W33Collection.json -e W33Env.json**. This is the most basical way to execute Postman's API automation scripts on Jenkins, you can add more setup such as running on scheldule, sending email.
+We assume that Jenkins is already setup on our machine and the Node.js and Newman is installed in that machine.
+
+We will go throw to know how to run automation test script with Postman on the Jenkins. Firstly, we create new **Freestyle project** with name **W33_Postman_Api_Automation_Test**. Then, we chose Source Code Management with Git by inputing Repository URL and Credentials. After setup source code repository we add **Execute Windows batch command** in **Build** and add this command to run the scripts **newman run W33Collection.json -e W33Env.json**. This is the most basic way to execute Postman's API automation scripts on Jenkins, you can add more setup such as running on schedule, sending email.
+
+Beside, we can use jenkinsfile to setup continuous integration on Jenkins easily. we just initiate new pipeline project on Jenkins and set up that project to get data from git project and make it able to find the jenkinsfile.
 
 ## Demo
 
-The demo is stored in the [git project](https://gitlabhn.nashtechglobal.com/hn-automation-team/api-automation-with-postman-starter-kit).
+The demo is stored in the [git project](https://github.com/W33HaaOrg/ApiTestPostMan.git).
